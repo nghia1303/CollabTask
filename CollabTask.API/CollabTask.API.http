@@ -1,0 +1,6 @@
+@CollabTask.API_HostAddress = http://localhost:5124
+
+GET {{CollabTask.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
