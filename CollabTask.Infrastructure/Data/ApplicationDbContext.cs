@@ -1,7 +1,7 @@
 using CollabTask.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CollabTask.Infrastructure
+namespace CollabTask.Infrastructure.Data
 {
     public class ApplicationDbContext : DbContext
     {

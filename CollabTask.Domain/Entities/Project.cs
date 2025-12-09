@@ -4,10 +4,10 @@ namespace CollabTask.Domain.Entities
 {
     public class Project
     {
-        public Guid Id { get; private set; }
-        public string Name { get; private set; } = string.Empty;
-        public string? Description { get; private set; }
-        public DateTime CreatedDate { get; private set; }
+        public Guid Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string? Description { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         // Relationship (sẽ dùng sau)
         private readonly List<TodoTask> _task = new();
