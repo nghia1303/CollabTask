@@ -2,31 +2,37 @@ using CollabTask.Application;
 using CollabTask.Infrastructure;
 using CollabTask.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Add Infrastructure (DbContext + Repositories)
+// DbContext + Repository
 builder.Services.AddInfrastructure(builder.Configuration);
-
-// 2. Add OpenAPI (if needed)
-builder.Services.AddOpenApi();
-
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 
+// Đăng ký Controllers (rất quan trọng nếu bạn dùng Controller)
+builder.Services.AddControllers();
+
+// Đăng ký Swagger (Swashbuckle)
+builder.Services.AddOpenApi();
+
 var app = builder.Build();
 
-// 3. Configure middleware
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
 
-// Example endpoint
+// Map Controllers
+app.MapControllers();
+
+// Endpoint test
 app.MapGet("/", () => "CollabTask API is running");
 
 app.Run();
-

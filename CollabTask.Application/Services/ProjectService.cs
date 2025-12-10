@@ -24,7 +24,7 @@ public class ProjectService : IProjectService
         var project = await _repository.GetByIdAsync(id);
         if (project == null)
         {
-            throw new Exception("Không thể tìm thấy dự án");
+            throw new KeyNotFoundException($"Project with id {id} not found.");
         }
         await _repository.DeleteAsync(project);
     }
@@ -46,7 +46,10 @@ public class ProjectService : IProjectService
     {
         var project = await _repository.GetByIdAsync(id);
 
-        if (project == null) return null;
+        if (project == null)
+        {
+            throw new KeyNotFoundException($"Project with id {id} not found.");
+        }
 
         return new ProjectDto(project.Id, project.Name, project.Description, project.CreatedDate);
     }
@@ -57,12 +60,10 @@ public class ProjectService : IProjectService
 
         if (project == null)
         {
-            throw new Exception("Không thể tìm thấy dự án");
+            throw new KeyNotFoundException($"Project with id {id} not found.");
         }
 
-        project.Name = projectDto.Name;
-        project.Description = projectDto.Description;
-
+        project.Update(projectDto.Name, projectDto.Description);
         await _repository.UpdateAsync(project);
     }
 }
