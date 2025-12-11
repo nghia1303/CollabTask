@@ -20,6 +20,7 @@ public class ProjectRepository : IProjectRepository
         await _context.AddAsync(project);
         await _context.SaveChangesAsync();
     }
+    
 
     public async Task DeleteAsync(Project project)
     {

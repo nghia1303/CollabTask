@@ -13,6 +13,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 
+builder.Services.AddScoped<ITodoTaskRepository, TodoTaskRepository>();
+builder.Services.AddScoped<ITodoTaskService, TodoTaskService>();
+
 // Đăng ký Controllers (rất quan trọng nếu bạn dùng Controller)
 builder.Services.AddControllers();
 
@@ -25,6 +28,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
     app.MapScalarApiReference();
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
 }
 
 app.UseHttpsRedirection();

@@ -8,7 +8,7 @@ namespace CollabTask.Infrastructure.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<Project> Projects { get; set; }
-        public DbSet<TodoTask> TodoTask { get; set; }
+        public DbSet<TodoTask> TodoTasks { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
