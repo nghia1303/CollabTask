@@ -16,15 +16,7 @@ public class TodoTaskService : ITodoTaskService
     public async Task<Guid> CreateTodoTaskAsync(CreateTaskDto createTaskDto)
     {
         var project = await _projectRepository.GetByIdAsync(createTaskDto.ProjectId);
-        if (project == null)
-        {
-            throw new KeyNotFoundException($"Project with id: {createTaskDto.ProjectId} not found.");
-        }
 
-        if (createTaskDto.DueDate < DateTime.UtcNow)
-        {
-            throw new ValidationException($"Due date cannot be in the past.");
-        }
         var todoTask = new TodoTask(createTaskDto.Title, createTaskDto.Description, createTaskDto.ProjectId, createTaskDto.DueDate);
         await _todoTaskRepository.AddAsync(todoTask);
 

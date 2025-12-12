@@ -13,11 +13,22 @@ namespace CollabTask.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<TodoTask>()
-            .HasOne<Project>()
-            .WithMany(p => p.Tasks)
-            .HasForeignKey(t => t.ProjectId)
-            .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Project>(entity =>
+            {
+                entity.HasMany(p => p.Tasks)
+                .WithOne()
+                .HasForeignKey(t => t.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+                // Cach 1
+                entity.Navigation(p => p.Tasks)
+                .HasField("_tasks")
+                .UsePropertyAccessMode(PropertyAccessMode.Field);
+
+                // Cach 2
+                // entity.Metadata.FindNavigation(nameof(Project.Tasks))!
+                // .SetPropertyAccessMode(PropertyAccessMode.Field);
+            });
         }
     }
 }

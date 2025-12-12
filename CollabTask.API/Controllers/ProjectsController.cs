@@ -4,10 +4,10 @@ using CollabTask.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MyApp.Namespace
+namespace CollabTask.Api
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class ProjectsController : ControllerBase
     {
         private readonly IProjectService _projectService;

@@ -1,6 +1,8 @@
 using CollabTask.Application;
 using CollabTask.Infrastructure;
 using CollabTask.Infrastructure.Data;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
@@ -18,6 +20,9 @@ builder.Services.AddScoped<ITodoTaskService, TodoTaskService>();
 
 // Đăng ký Controllers (rất quan trọng nếu bạn dùng Controller)
 builder.Services.AddControllers();
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateTaskDtoValidator>();
 
 // Đăng ký Swagger (Swashbuckle)
 builder.Services.AddOpenApi();

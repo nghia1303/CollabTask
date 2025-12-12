@@ -10,9 +10,8 @@ namespace CollabTask.Domain.Entities
         public DateTime CreatedDate { get; set; }
 
         // Relationship (sẽ dùng sau)
-        private readonly List<TodoTask> _task = new();
-
-        public IReadOnlyCollection<TodoTask> Tasks => _task.AsReadOnly();
+        private readonly List<TodoTask> _tasks = new();
+        public IReadOnlyCollection<TodoTask> Tasks => _tasks.AsReadOnly();
         public Project() { }
         public Project(string name, string? description)
         {

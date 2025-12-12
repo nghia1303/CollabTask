@@ -2,14 +2,14 @@ using CollabTask.Application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MyApp.Namespace
+namespace CollabTask.Api
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class TodoTaskController : ControllerBase
+    [Route("api/[controller]")]
+    public class TodoTasksController : ControllerBase
     {
         private readonly ITodoTaskService _service;
-        public TodoTaskController(ITodoTaskService service)
+        public TodoTasksController(ITodoTaskService service)
         {
             _service = service;
         }
