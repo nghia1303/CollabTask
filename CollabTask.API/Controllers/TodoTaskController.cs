@@ -20,5 +20,11 @@ namespace CollabTask.Api
             var taskId = await _service.CreateTodoTaskAsync(createTaskDto);
             return Ok(new { id = taskId });
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAllTask()
+        {
+            var tasks = await _service.GetAllAsync();
+            return Ok(tasks);
+        }
     }
 }

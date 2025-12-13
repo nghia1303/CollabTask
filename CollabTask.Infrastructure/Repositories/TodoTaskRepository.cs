@@ -17,13 +17,11 @@ public class TodoTaskRepository : ITodoTaskRepository
     public async Task AddAsync(TodoTask todoTask)
     {
         await _context.AddAsync(todoTask);
-        await _context.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(TodoTask todoTask)
     {
         _context.TodoTasks.Remove(todoTask);
-        await _context.SaveChangesAsync();
     }
 
     public async Task<IEnumerable<TodoTask>> GetAllAsync()
@@ -39,6 +37,5 @@ public class TodoTaskRepository : ITodoTaskRepository
     public async Task UpdateAsync(TodoTask todoTask)
     {
         _context.TodoTasks.Update(todoTask);
-        await _context.SaveChangesAsync();
     }
 }

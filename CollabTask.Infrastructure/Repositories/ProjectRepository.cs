@@ -18,14 +18,12 @@ public class ProjectRepository : IProjectRepository
     public async Task AddAsync(Project project)
     {
         await _context.AddAsync(project);
-        await _context.SaveChangesAsync();
     }
-    
+
 
     public async Task DeleteAsync(Project project)
     {
         _context.Projects.Remove(project);
-        await _context.SaveChangesAsync();
     }
 
     public async Task<IEnumerable<Project>> GetAllAsync()
@@ -41,6 +39,13 @@ public class ProjectRepository : IProjectRepository
     public async Task UpdateAsync(Project project)
     {
         _context.Projects.Update(project);
-        await _context.SaveChangesAsync();
+    }
+
+    // Thêm hàm này (và nhớ khai báo trong Interface IProjectRepository nhé)
+    public async Task<Project?> GetByIdWithTasksAsync(Guid id)
+    {
+        return await _context.Projects
+            .Include(p => p.Tasks) // <--- Eager Loading: Lấy luôn Task con
+            .FirstOrDefaultAsync(p => p.Id == id);
     }
 }
